@@ -1,8 +1,68 @@
 <!DOCTYPE html>
-<head>
 
+<head>
 </head>
+
 <body>
   <script>
+    function computerPlay() {
+      var randomNum = Math.floor(Math.random() * 3) + 1;
+
+      switch (randomNum) {
+        case 1:
+          return "paper";
+        case 2:
+          return "rock";
+        case 3:
+          return "scissors";
+        default:
+          return "Uh oh";
+      }
+      return "Hrmmm?";
+    }
+
+    function playRound(playerSelection, computerSelection) {
+      var choices = ["rock", "paper", "scissors"];
+      var x = choices.indexOf(playerSelection.toLowerCase()),
+        y = choices.indexOf(computerSelection.toLowerCase());
+      if (x === y) {
+        return ("The result is a tie!");
+      } else if (x > y) {
+        if (x == 3 && y == 0) {
+          return "CPU wins";
+        } else {
+          return "Player wins";
+        }
+      } else {
+        return "CPU wins";
+      }
+    }
+
+    function game() {
+      //play 5 rounds, prompting user for input
+      var tally = 0;
+
+      for (i = 0; i < 5; i++) {
+        //If invalid input, player just looses
+        var playerSelection = prompt("Rock, Paper, or Scissors?");
+        var computerSelection = computerPlay();
+        var winner = playRound(playerSelection, computerSelection);
+
+        if (winner == "CPU wins") {
+          tally--;
+        } else if (winner == "Player wins") {
+          tally++;
+        }
+        console.log(winner);
+      }
+      if (tally > 0) {
+        console.log("Player Wins The Overall Game!");
+      } else if (tally == 0) {
+        console.log("Overall Game was a tie!")
+      } else {
+        console.log("CPU Wins the Overall game!");
+      }
+    }
+    game();
   </script>
 </body>
